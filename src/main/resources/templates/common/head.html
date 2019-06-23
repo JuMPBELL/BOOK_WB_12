@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="header">
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>spring-boot-demo-template-thymeleaf</title>
+    <script src="https://cdn.bootcss.com/jquery/3.4.1/jquery.js"></script>
+    <script>
+        $(document).ready(function () {
+            $("#tb").on('click','#buy',function () {
+                var row = $(this).closest("tr");
+                var col1 = row.find("td:eq(0)").text();
+                dologin(col1);
+            })
+        })
+
+        function dologin(id){
+            $.ajax({
+                url:"/API/update",
+                type:"post",
+                dataType:"text",
+                async:false,
+                data:{id:id},
+                success:function(data){
+                    if(data == "true") {
+                        alert("购买成功")
+                    }else{
+                        alert("购买失败")
+                    }
+                    location.reload()
+                },
+                error:function () {
+                    alert("error")
+                }
+            });
+        }
+
+    </script>
+</head>
+<body>
+</body>
+</html>
